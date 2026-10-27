@@ -660,6 +660,68 @@
     border-radius:10px !important; font-weight:700 !important; box-shadow:none !important;
   }
   .acond-subtabs button.active,.abast-subtabs button.active{background:var(--hs-red) !important; border-color:var(--hs-red) !important; color:#fff !important;}
+
+  /* ============ PANEL 05 · COMPARATIVO MENSUAL ============ */
+  #view-comparativo{gap:0;}
+  .comp-hero{
+    display:grid; grid-template-columns:auto 1fr auto auto; gap:18px; align-items:center;
+    background:linear-gradient(120deg,#1A3563,#0F2140 60%);
+    border:1px solid var(--line-strong); border-left:5px solid var(--hs-red); border-radius:12px;
+    padding:12px 18px; margin-bottom:14px;
+  }
+  .comp-months{display:flex; align-items:center; gap:14px;}
+  .comp-month .cm-label{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.5px;}
+  .comp-month .cm-name{font-family:var(--disp); font-size:24px; font-weight:600; line-height:1.15;}
+  .comp-month .cm-sub{font-size:13px; color:var(--ink-dim);}
+  .comp-month.prev .cm-name{color:var(--ink-dim);}
+  .comp-vs{font-family:var(--disp); font-size:15px; font-weight:700; color:#fff; background:var(--hs-red); border-radius:99px; padding:4px 11px;}
+  .comp-pace .cp-label{font-size:13.5px; color:var(--ink-dim); margin-bottom:6px; display:flex; justify-content:space-between; gap:10px;}
+  .comp-pace .cp-label b{font-family:var(--disp); color:var(--ink); font-size:16px;}
+  .comp-pace .cp-track{height:10px; border-radius:99px; background:#0000004D; border:1px solid var(--line-strong); overflow:hidden;}
+  .comp-pace .cp-fill{height:100%; background:linear-gradient(90deg,var(--sky),var(--teal)); border-radius:99px;}
+  .comp-summary{display:flex; gap:8px;}
+  .comp-chip{background:#0000002E; border:1px solid var(--line-strong); border-radius:10px; padding:6px 12px; text-align:center; min-width:96px;}
+  .comp-chip .cc-v{font-family:var(--disp); font-size:24px; font-weight:600;}
+  .comp-chip .cc-l{font-size:12px; color:var(--ink-dim);}
+  .comp-chip.up .cc-v{color:#6ED4A8;}
+  .comp-chip.down .cc-v{color:#F08981;}
+  .comp-select{display:flex; flex-direction:column; gap:4px;}
+  .comp-select label{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.5px;}
+  .comp-select select{
+    appearance:none; background:var(--panel-raised); color:var(--ink); border:1px solid var(--line-strong);
+    border-radius:8px; padding:7px 30px 7px 10px; font-family:var(--body); font-size:14px; cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--ink-dim) 50%),linear-gradient(135deg,var(--ink-dim) 50%,transparent 50%);
+    background-position:calc(100% - 15px) 50%, calc(100% - 10px) 50%; background-size:5px 5px; background-repeat:no-repeat;
+  }
+
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start;}
+  .comp-block{background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column;}
+  .comp-block-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 14px; background:var(--panel-raised); border-bottom:1px solid var(--line-strong); border-left:4px solid var(--accent,var(--teal));}
+  .comp-block-head h3{margin:0; font-family:var(--disp); font-size:16.5px; font-weight:600;}
+  .comp-block-head .cb-note{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);}
+  .comp-table{width:100%; border-collapse:collapse;}
+  .comp-table th{font-size:11.5px !important; padding:7px 10px !important; background:transparent; position:static; text-align:right;}
+  .comp-table th:first-child{text-align:left;}
+  .comp-table th.c-bar{text-align:left;}
+  .comp-table td{padding:6px 10px !important; font-size:14.5px !important; text-align:right;}
+  .comp-table td.c-name{text-align:left; font-family:var(--body); color:var(--ink-dim); font-size:14.5px !important;}
+  .comp-table td.c-prev{color:var(--ink-dim);}
+  .comp-table td.c-cur{font-weight:600; color:var(--ink);}
+  .comp-table td.c-proy{color:var(--ink-dim);}
+  .comp-table td.c-bar{width:24%; min-width:120px; text-align:left;}
+  .cbar{position:relative; height:9px; border-radius:99px; background:#00000040; border:1px solid var(--line);}
+  .cbar .cbar-fill{position:absolute; left:0; top:0; bottom:0; border-radius:99px;}
+  .cbar .cbar-100{position:absolute; top:-3px; bottom:-3px; width:1px; background:var(--ink-faint);}
+  .cbar .cbar-pace{position:absolute; top:-4px; bottom:-4px; width:2px; background:#fff; border-radius:2px; box-shadow:0 0 0 1px #0006;}
+  .cbar-txt{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); margin-top:3px;}
+  .comp-legend{display:flex; flex-wrap:wrap; gap:18px; margin-top:10px; font-size:12.5px; color:var(--ink-faint);}
+  .comp-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .comp-legend i{display:inline-block;}
+  .comp-empty{padding:30px; text-align:center; color:var(--ink-dim); font-size:15px;}
+  @media(max-width:1100px){
+    .comp-hero{grid-template-columns:1fr;}
+    .comp-grid{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
@@ -684,6 +746,7 @@
     <button data-view="despacho"><span class="dot" style="background:var(--amber)"></span>Despacho</button>
     <button data-view="abastecimiento"><span class="dot" style="background:var(--green)"></span>Abastecimiento</button>
     <button data-view="acondicionamiento"><span class="dot" style="background:var(--violet)"></span>Acondicionamiento</button>
+    <button data-view="comparativo"><span class="dot" style="background:var(--hs-red-soft)"></span>Comparativo</button>
   </nav>
 
   <div class="status" id="liveBadge">
@@ -1151,6 +1214,51 @@
     </div>
   </section>
 
+  <!-- ============ VISTA 5 — COMPARATIVO MENSUAL ============ -->
+  <section class="view" id="view-comparativo">
+    <div class="view-head">
+      <div class="eyebrow">PANEL 05 · COMPARATIVO</div>
+      <h2 id="compTitle">Octubre vs septiembre</h2>
+    </div>
+
+    <div class="comp-hero">
+      <div class="comp-months">
+        <div class="comp-month prev">
+          <div class="cm-label">Mes cerrado</div>
+          <div class="cm-name" id="compPrevName">—</div>
+          <div class="cm-sub" id="compPrevSub">—</div>
+        </div>
+        <div class="comp-vs">VS</div>
+        <div class="comp-month cur">
+          <div class="cm-label">Mes en curso</div>
+          <div class="cm-name" id="compCurName">—</div>
+          <div class="cm-sub" id="compCurSub">a hoy</div>
+        </div>
+      </div>
+      <div class="comp-pace">
+        <div class="cp-label"><span>Avance del mes (días hábiles)</span><b id="compPacePct">0%</b></div>
+        <div class="cp-track"><div class="cp-fill" id="compPaceFill" style="width:0%"></div></div>
+      </div>
+      <div class="comp-summary">
+        <div class="comp-chip up"><div class="cc-v" id="compUp">0</div><div class="cc-l">▲ arriba del ritmo</div></div>
+        <div class="comp-chip down"><div class="cc-v" id="compDown">0</div><div class="cc-l">▼ abajo del ritmo</div></div>
+      </div>
+      <div class="comp-select">
+        <label for="compSelect">Comparar contra</label>
+        <select id="compSelect"></select>
+      </div>
+    </div>
+
+    <div class="comp-grid" id="compGrid"></div>
+
+    <div class="comp-legend">
+      <span><i style="width:22px;height:8px;border-radius:99px;background:var(--teal)"></i>Barra: mes en curso como % del mes cerrado</span>
+      <span><i style="width:2px;height:14px;background:#fff"></i>Línea blanca: avance esperado a hoy</span>
+      <span>Proyección: ritmo actual llevado a fin de mes (días hábiles lun–vie)</span>
+      <span>Exportaciones, promedios y máximos se comparan directo (no se proyectan)</span>
+    </div>
+  </section>
+
 </main>
 
 </div>
@@ -1237,6 +1345,18 @@ const DATA = {
   ]
 };
 
+/* Cierre de septiembre (copia de HISTÓRICO MENSUAL) — solo se usa si no hay conexión al Sheet */
+DATA.historico = [{
+  "Mes":"SEPTIEMBRE","Año":"2026","Estado":"CERRADO","Fecha de corte":"30/09/2026",
+  "Exportaciones":8,"Pallets exportación":33,"Ítems exportación":179,"Unid. fármaco":136544,"Unid. promoción":1300,
+  "Unid. alimento":3962,"Total unidades exportadas":141806,"Vehículos Beccar":25,"Pallets Beccar":130,
+  "Vehículos Zárate":16,"Pallets Zárate":4,"Vehículos Beccar→Zárate":7,"Pallets Beccar→Zárate":41,
+  "Pallets exportación despachados":20,"Proveedores recibidos":86,"Ítems recibidos":186,"Kg fármaco":9610.98,
+  "Kg alimento":54590,"Kg promoción":213.62,"Kg psicotrópicos":391.2,"Remitos del mes":559,"Unid. ACO mes":78087.2,
+  "Bultos ACO":219,"OP ACO mes":402,"Prom. OP ACO/día":19.1,"Máx. OP ACO":66,"OP FRA mes":77,"Prom. OP FRA/día":5.9,"Máx. OP FRA":10
+}];
+let compSelectedKey = null;   // mes elegido en "Comparar contra" (null = mes anterior automático)
+
 const GOOGLE_SHEETS_CONFIG = {
   enabled:true,
   sheetId:"15NxYII3HaIlTgr3hI0pI3KQqyyFqC-jmUMgT9t5VN4w",
@@ -1254,7 +1374,9 @@ const GOOGLE_SHEETS_CONFIG = {
     // OP Fraccionamiento: columnas A y B COMPLETAS (sin rango fijo). Se filtra el mes actual en el navegador.
     opFra:            { sheet:"OP FRA",                    tq:"select A, B where A is not null", headers:1 },
     recepciones:      { sheet:"Puente HTML",               range:"D1:E25", headers:0 },
-    itemsFalta:       { sheet:"Registro Diario PROVEEDORES", range:"K2:L60", headers:0 }
+    itemsFalta:       { sheet:"Registro Diario PROVEEDORES", range:"K2:L60", headers:0 },
+    // Comparativo mensual: una fila por mes cerrado (Mes, Año, Estado, Fecha de corte, indicadores...)
+    historico:        { sheet:"HISTÓRICO MENSUAL",          range:"A1:AG60", headers:1 }
   }
 };
 
@@ -1283,6 +1405,25 @@ async function fetchSheetCells(sheetId, cfg){
   const text = await res.text();
   const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
   return json.table.rows.map(r => r.c.map(cell => cell ? { v: cell.v, f: cell.f } : null));
+}
+
+/* Lee una tabla con encabezados y devuelve un objeto por fila: { "Mes":"SEPTIEMBRE", "Exportaciones":"8", ... } */
+async function fetchSheetTable(sheetId, cfg){
+  const params = new URLSearchParams({ tqx:"out:json", sheet: cfg.sheet });
+  if(cfg.range) params.set("range", cfg.range);
+  if(cfg.headers !== undefined) params.set("headers", String(cfg.headers));
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?${params.toString()}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+  const labels = json.table.cols.map(c => String(c.label || "").trim());
+  return json.table.rows
+    .map(r => {
+      const o = {};
+      r.c.forEach((cell, i) => { if(labels[i]) o[labels[i]] = cell ? (cell.f ?? cell.v ?? "") : ""; });
+      return o;
+    })
+    .filter(o => String(o["Mes"] || "").trim() !== "");
 }
 
 /* Fecha de una celda gviz: "Date(2026,8,1)" (mes base 0) o texto dd/mm/aaaa */
@@ -1419,6 +1560,11 @@ async function loadFromGoogleSheets(){
     DATA.itemsFalta = faltaRows
       .map(row => ({expo:row[0], faltante:row[1]}))
       .filter(r => r.expo || r.faltante);
+
+    try{
+      const hist = await fetchSheetTable(sheetId, tabs.historico);
+      if(hist.length) DATA.historico = hist;
+    }catch(e){ console.warn("No se pudo leer HISTÓRICO MENSUAL:", e); }
 
     renderAll();
     setLiveStatus(true);
@@ -1846,6 +1992,214 @@ function updateDynamicLabels(){
   if(abastHint) abastHint.textContent = `acumulado de ${actual.nombre}`;
 }
 
+/* ============ PANEL 05 · COMPARATIVO MENSUAL ============ */
+function normKey(s){
+  return String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+/* Busca un valor del histórico por nombre de columna (ignora tildes, espacios, flechas, mayúsculas) */
+function histVal(row, col){
+  if(!row) return null;
+  const target = normKey(col);
+  for(const k in row){ if(normKey(k) === target) return row[k]; }
+  return null;
+}
+function diasHabilesTotalesMes(){
+  const hoy = new Date();
+  const ultimo = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).getDate();
+  let n = 0;
+  for(let d = 1; d <= ultimo; d++){
+    const w = new Date(hoy.getFullYear(), hoy.getMonth(), d).getDay();
+    if(w !== 0 && w !== 6) n++;
+  }
+  return n;
+}
+function fmtComp(n, dec){
+  if(n === null || n === undefined || isNaN(n)) return "—";
+  return Number(n).toLocaleString("es-AR", { minimumFractionDigits:0, maximumFractionDigits:dec ?? 0 });
+}
+/* Kg / remitos del acumulado mensual por categoría (Historial KG) */
+function acumPorCategoria(clave, campo){
+  const r = (DATA.acumuladoMensual || []).find(x => normKey(x.categoria).includes(clave));
+  return r ? toNum(r[campo]) : 0;
+}
+function opStatsActual(rows){
+  const filas = (rows || []).filter(r => toNum(r.cantidad) > 0);
+  return computeOpDiaStats(filas);
+}
+
+/* tipo: "flujo" = se acumula día a día (se compara contra el ritmo y se proyecta)
+         "directo" = plan del mes, promedio o máximo (se compara tal cual) */
+function getComparativoSecciones(){
+  const k = DATA.kpis;
+  const aco = opStatsActual(DATA.opPorDia);
+  const fra = opStatsActual(DATA.opFra);
+  const fraTotal = (DATA.opFra || []).reduce((a, r) => a + toNum(r.cantidad), 0);
+  const remitosTot = (DATA.acumuladoMensual || []).reduce((a, r) => a + toNum(r.remitos), 0);
+  return [
+    { titulo:"🚀 Exportaciones", nota:"plan del mes · comparación directa", accent:"var(--teal)", items:[
+      { label:"Exportaciones",          hist:"Exportaciones",             cur:toNum(k.exp_count),          tipo:"directo" },
+      { label:"Pallets",                hist:"Pallets exportación",       cur:toNum(k.exp_pallets),        tipo:"directo" },
+      { label:"Ítems",                  hist:"Ítems exportación",         cur:toNum(k.exp_items),          tipo:"directo" },
+      { label:"Unid. fármaco",          hist:"Unid. fármaco",             cur:toNum(k.exp_farmaco),        tipo:"directo" },
+      { label:"Unid. promoción",        hist:"Unid. promoción",           cur:toNum(k.exp_promo),          tipo:"directo" },
+      { label:"Unid. alimento",         hist:"Unid. alimento",            cur:toNum(k.exp_alimento),       tipo:"directo" },
+      { label:"Total unidades",         hist:"Total unidades exportadas", cur:toNum(k.exp_total_unidades), tipo:"directo", destacado:true }
+    ]},
+    { titulo:"🚚 Despacho", nota:"acumulado del mes", accent:"var(--amber)", items:[
+      { label:"Vehículos Beccar",        hist:"Vehículos Beccar",          cur:toNum(k.beccar_vehiculos),   tipo:"flujo" },
+      { label:"Pallets Beccar",          hist:"Pallets Beccar",            cur:toNum(k.beccar_pallets),     tipo:"flujo" },
+      { label:"Vehículos Zárate",        hist:"Vehículos Zárate",          cur:toNum(k.zarate_vehiculos),   tipo:"flujo" },
+      { label:"Pallets Zárate",          hist:"Pallets Zárate",            cur:toNum(k.zarate_pallets),     tipo:"flujo" },
+      { label:"Vehículos Beccar → Zárate", hist:"Vehículos Beccar→Zárate", cur:toNum(k.bz_vehiculos),       tipo:"flujo" },
+      { label:"Pallets Beccar → Zárate", hist:"Pallets Beccar→Zárate",     cur:toNum(k.bz_pallets),         tipo:"flujo" },
+      { label:"Pallets expo despachados", hist:"Pallets exportación despachados", cur:toNum(k.despachadas_total), tipo:"flujo", destacado:true }
+    ]},
+    { titulo:"📥 Recepciones y kilos", nota:"acumulado del mes", accent:"var(--green)", items:[
+      { label:"Proveedores recibidos",   hist:"Proveedores recibidos",     cur:toNum(k.proveedores),        tipo:"flujo" },
+      { label:"Ítems recibidos",         hist:"Ítems recibidos",           cur:toNum(k.articulos),          tipo:"flujo" },
+      { label:"Remitos del mes",         hist:"Remitos del mes",           cur:remitosTot,                  tipo:"flujo", destacado:true },
+      { label:"Kg fármaco",              hist:"Kg fármaco",                cur:acumPorCategoria("farm","kg"),  tipo:"flujo", dec:0 },
+      { label:"Kg alimento",             hist:"Kg alimento",               cur:acumPorCategoria("alim","kg"),  tipo:"flujo", dec:0 },
+      { label:"Kg promoción",            hist:"Kg promoción",              cur:acumPorCategoria("promo","kg"), tipo:"flujo", dec:0 },
+      { label:"Kg psicotrópicos",        hist:"Kg psicotrópicos",          cur:acumPorCategoria("psico","kg"), tipo:"flujo", dec:0 }
+    ]},
+    { titulo:"⚙️ Acondicionamiento y fraccionamiento", nota:"acumulado del mes", accent:"var(--violet)", items:[
+      { label:"Unid. a acondicionar (ML)", hist:"Unid. ACO mes",           cur:toNum(k.acond_unidades),     tipo:"flujo" },
+      { label:"Bultos estimados (ML)",   hist:"Bultos ACO",                cur:toNum(k.acond_bultos),       tipo:"flujo" },
+      { label:"OP acondicionamiento",    hist:"OP ACO mes",                cur:toNum(k.acond_op_mes),       tipo:"flujo", destacado:true },
+      { label:"Prom. OP ACO / día",      hist:"Prom. OP ACO/día",          cur:aco.avg,                     tipo:"directo", dec:1 },
+      { label:"Máx. OP ACO en un día",   hist:"Máx. OP ACO",               cur:aco.maxCantidad,             tipo:"directo" },
+      { label:"OP fraccionamiento",      hist:"OP FRA mes",                cur:fraTotal,                    tipo:"flujo", destacado:true },
+      { label:"Prom. OP FRA / día",      hist:"Prom. OP FRA/día",          cur:fra.avg,                     tipo:"directo", dec:1 },
+      { label:"Máx. OP FRA en un día",   hist:"Máx. OP FRA",               cur:fra.maxCantidad,             tipo:"directo" }
+    ]}
+  ];
+}
+
+function histRowKey(r){ return `${String(histVal(r,"Mes") || "").trim().toUpperCase()}|${toNum(histVal(r,"Año"))}`; }
+
+/* Mes a comparar: el elegido en el selector, o el mes anterior al actual, o el último cargado */
+function getHistRowComparado(){
+  const rows = DATA.historico || [];
+  if(!rows.length) return null;
+  if(compSelectedKey){
+    const r = rows.find(x => histRowKey(x) === compSelectedKey);
+    if(r) return r;
+  }
+  const ant = getMesInfo(-1);
+  const auto = rows.find(x => histRowKey(x) === `${ant.nombre.toUpperCase()}|${ant.anio}`);
+  return auto || rows[rows.length - 1];
+}
+
+function fillCompSelect(selRow){
+  const sel = document.getElementById("compSelect");
+  if(!sel) return;
+  const rows = DATA.historico || [];
+  sel.innerHTML = rows.map(r => {
+    const key = histRowKey(r);
+    const txt = `${capitalizar(String(histVal(r,"Mes") || "").toLowerCase())} ${toNum(histVal(r,"Año")) || ""}`;
+    return `<option value="${key}" ${selRow && key === histRowKey(selRow) ? "selected" : ""}>${txt}</option>`;
+  }).join("");
+}
+
+function compBar(ratio, paceFrac, tipo){
+  if(ratio === null) return `<span style="color:var(--ink-faint)">—</span>`;
+  const MAX = 1.25;                                    // la barra llega hasta 125% del mes comparado
+  const ref = tipo === "flujo" ? paceFrac : 1;        // flujo: contra lo esperado a hoy · directo: contra 100%
+  const rel = ref > 0 ? ratio / ref : 0;
+  const color = rel >= 1.03 ? "var(--green)" : (rel >= 0.9 ? "var(--teal)" : (rel >= 0.75 ? "var(--amber)" : "var(--coral)"));
+  const w = Math.min(ratio, MAX) / MAX * 100;
+  const pace = tipo === "flujo" ? `<div class="cbar-pace" style="left:calc(${(Math.min(paceFrac, MAX) / MAX * 100).toFixed(1)}% - 1px)"></div>` : "";
+  return `<div class="cbar"><div class="cbar-fill" style="width:${w.toFixed(1)}%; background:${color}"></div><div class="cbar-100" style="left:${(100/MAX).toFixed(1)}%"></div>${pace}</div>
+          <div class="cbar-txt">${Math.round(ratio * 100)}% del mes cerrado</div>`;
+}
+
+function compVarPill(v){
+  if(v === null || !isFinite(v)) return `<span style="color:var(--ink-faint)">—</span>`;
+  const pct = v * 100;
+  if(Math.abs(pct) < 3) return pill(`≈ ${pct >= 0 ? "+" : ""}${Math.round(pct)}%`, "gray");
+  return pct > 0 ? pill(`▲ +${Math.round(pct)}%`, "green") : pill(`▼ ${Math.round(pct)}%`, "coral");
+}
+
+function renderComparativo(){
+  const grid = document.getElementById("compGrid");
+  if(!grid) return;
+
+  const row = getHistRowComparado();
+  fillCompSelect(row);
+
+  const actual = getMesInfo(0);
+  const habTrans = diasHabilesDelMes();
+  const habTot = diasHabilesTotalesMes();
+  const paceFrac = habTot ? habTrans / habTot : 1;
+
+  setTextIfExists("compCurName", `${capitalizar(actual.nombre)} ${actual.anio}`);
+  setTextIfExists("compCurSub", `a hoy · ${habTrans} de ${habTot} días hábiles`);
+  setTextIfExists("compPacePct", `${Math.round(paceFrac * 100)}%`);
+  const pf = document.getElementById("compPaceFill");
+  if(pf) pf.style.width = `${Math.min(100, paceFrac * 100).toFixed(1)}%`;
+
+  if(!row){
+    setTextIfExists("compPrevName", "—");
+    setTextIfExists("compPrevSub", "sin meses cerrados");
+    setTextIfExists("compTitle", `${capitalizar(actual.nombre)} — sin mes para comparar`);
+    grid.innerHTML = `<div class="comp-empty" style="grid-column:1/-1">Todavía no hay meses cargados en la hoja <b>HISTÓRICO MENSUAL</b>.</div>`;
+    return;
+  }
+
+  const prevNombre = String(histVal(row, "Mes") || "").toLowerCase();
+  const prevAnio = toNum(histVal(row, "Año"));
+  const corte = histVal(row, "Fecha de corte");
+  setTextIfExists("compPrevName", `${capitalizar(prevNombre)} ${prevAnio || ""}`);
+  setTextIfExists("compPrevSub", corte ? `cierre ${corte}` : "cierre");
+  setTextIfExists("compTitle", `${capitalizar(actual.nombre)} vs ${prevNombre}`);
+
+  const mesPrevCorto = capitalizar(prevNombre).slice(0, 3) + ".";
+  const mesActCorto = capitalizar(actual.nombre).slice(0, 3) + ".";
+  let arriba = 0, abajo = 0;
+
+  grid.innerHTML = getComparativoSecciones().map(sec => {
+    const filas = sec.items.map(it => {
+      const prevRaw = histVal(row, it.hist);
+      const prev = (prevRaw === null || prevRaw === "") ? null : toNum(prevRaw);
+      const cur = it.cur;
+      const ratio = (prev && prev > 0) ? cur / prev : null;
+      const proy = it.tipo === "flujo" && paceFrac > 0 ? cur / paceFrac : null;
+      const base = it.tipo === "flujo" ? proy : cur;
+      const varPct = (prev && prev > 0) ? (base - prev) / prev : null;
+
+      if(it.tipo === "flujo" && varPct !== null){
+        if(varPct >= 0.03) arriba++; else if(varPct <= -0.03) abajo++;
+      }
+      const dec = it.dec ?? 0;
+      const nameStyle = it.destacado ? ` style="color:var(--ink); font-weight:600"` : "";
+      return `
+        <tr>
+          <td class="c-name"${nameStyle}>${it.label}</td>
+          <td class="num c-prev">${fmtComp(prev, dec)}</td>
+          <td class="num c-cur">${fmtComp(cur, dec)}</td>
+          <td class="c-bar">${compBar(ratio, paceFrac, it.tipo)}</td>
+          <td class="num c-proy">${proy !== null ? fmtComp(proy, dec) : `<span style="color:var(--ink-faint)">—</span>`}</td>
+          <td class="num">${compVarPill(varPct)}</td>
+        </tr>`;
+    }).join("");
+    return `
+      <div class="comp-block" style="--accent:${sec.accent}">
+        <div class="comp-block-head"><h3>${sec.titulo}</h3><span class="cb-note">${sec.nota}</span></div>
+        <table class="comp-table">
+          <thead><tr>
+            <th>Indicador</th><th>${mesPrevCorto}</th><th>${mesActCorto} a hoy</th>
+            <th class="c-bar">Avance</th><th>Proy. cierre</th><th>Var.</th>
+          </tr></thead>
+          <tbody>${filas}</tbody>
+        </table>
+      </div>`;
+  }).join("");
+
+  setTextIfExists("compUp", arriba);
+  setTextIfExists("compDown", abajo);
+}
+
 function renderAll(){
   updateDynamicLabels();
   renderKpis();
@@ -1859,10 +2213,11 @@ function renderAll(){
   renderOpPorDia();
   renderOpFra();
   renderPromediosRecepcion();
+  renderComparativo();
 }
 
 const AUTO_ADVANCE_SECONDS = 60;
-const VIEWS = ["exportaciones", "exportaciones-siguiente", "despacho", "abastecimiento", "acondicionamiento"];
+const VIEWS = ["exportaciones", "exportaciones-siguiente", "despacho", "abastecimiento", "acondicionamiento", "comparativo"];
 let currentViewIndex = 0;
 let autoAdvanceTimer = null;
 let presenterMode = false;
@@ -2074,6 +2429,11 @@ document.getElementById("abastSubtabs")?.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-abast-sub]");
   if(!btn) return;
   setAbastSubView(btn.dataset.abastSub);
+});
+
+document.getElementById("compSelect")?.addEventListener("change", (e) => {
+  compSelectedKey = e.target.value;
+  renderComparativo();
 });
 
 document.addEventListener("click", resetAutoAdvance);
