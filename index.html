@@ -632,6 +632,28 @@
   nav.tabs button.active .dot{background:#fff !important;}
 
   .status{color:#ffffffcc !important;}
+
+  /* ---------- Personal por sector (franja fija en todos los módulos) ---------- */
+  .personal-strip{
+    flex-basis:100%; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    margin-top:2px; padding:8px 14px; border-radius:12px;
+    background:#ffffff10; border:1px solid #ffffff26;
+  }
+  .personal-strip .ps-title{
+    font-family:var(--disp); font-weight:700; font-size:15px; color:#fff;
+    text-transform:uppercase; letter-spacing:.6px; display:flex; align-items:center; gap:8px;
+    padding-right:14px; border-right:1px solid #ffffff33;
+  }
+  .personal-strip .ps-title small{font-weight:500; color:#ffffffaa; text-transform:none; letter-spacing:0; font-size:13px;}
+  .personal-strip .ps-sector{display:flex; align-items:center; gap:8px; padding-right:14px; border-right:1px solid #ffffff22;}
+  .personal-strip .ps-sector:last-child{border-right:none;}
+  .personal-strip .ps-name{font-weight:700; font-size:14px; color:#ffffffcc; text-transform:uppercase; letter-spacing:.4px;}
+  .personal-strip .ps-count{font-family:var(--mono); font-size:12.5px; color:#fff; background:var(--hs-red); border-radius:99px; padding:1px 8px; font-weight:700;}
+  .personal-strip .ps-chip{
+    font-family:var(--mono); font-weight:700; font-size:16px; color:#fff;
+    background:#ffffff1c; border:1px solid #ffffff40; border-radius:8px; padding:3px 10px;
+  }
+  .personal-strip .ps-empty{font-size:14px; color:#ffffff88; font-style:italic;}
   .fs-btn{background:#ffffff14 !important; color:#fff !important; border:1px solid #ffffff33 !important; border-radius:10px !important; font-weight:700 !important;}
   .fs-btn:hover{border-color:var(--hs-red) !important;}
   .fs-btn.on{background:var(--hs-red) !important; border-color:var(--hs-red) !important;}
@@ -763,6 +785,11 @@
 
   <button id="presenterBtn" class="fs-btn" onclick="togglePresenterMode()">▶ Auto-avance activo</button>
   <button id="fullscreenBtn" class="fs-btn" onclick="toggleFullscreen()">⛶ Pantalla completa</button>
+
+  <div class="personal-strip" id="personalStrip">
+    <div class="ps-title">👷 Personal hoy <small id="personalFecha"></small></div>
+    <div id="personalSectores" style="display:contents"></div>
+  </div>
 </header>
 
 <main>
@@ -1266,6 +1293,10 @@
 
 <script>
 const DATA = {
+  personal: [
+    { sector:"ABASTECIMIENTO", personas:["GL","LB","TV"] },
+    { sector:"EXPEDICIÓN", personas:["GF","MS","LF","JZ"] }
+  ],
   kpis: {
     exp_count:"7", exp_pallets:"34", exp_items:"154", exp_farmaco:"132.330",
     exp_promo:"1.300", exp_alimento:"3.962", exp_total_unidades:"137.592",
@@ -1376,7 +1407,10 @@ const GOOGLE_SHEETS_CONFIG = {
     recepciones:      { sheet:"Puente HTML",               range:"D1:E25", headers:0 },
     itemsFalta:       { sheet:"Registro Diario PROVEEDORES", range:"K2:L60", headers:0 },
     // Comparativo mensual: una fila por mes cerrado (Mes, Año, Estado, Fecha de corte, indicadores...)
-    historico:        { sheet:"HISTÓRICO MENSUAL",          range:"A1:AG60", headers:1 }
+    historico:        { sheet:"HISTÓRICO MENSUAL",          range:"A1:AG60", headers:1 },
+    // Personal por sector: fila 1 = nombre del sector, fila 2 = iniciales separadas por "-" (ej. GL-LB-TV).
+    // Toma hasta 10 columnas (A:J): si agregás un sector nuevo en C1/C2, aparece solo.
+    personal:         { sheet:"PERSONAL POR SECTOR",        range:"A1:J2", headers:1 }
   }
 };
 
@@ -1424,6 +1458,49 @@ async function fetchSheetTable(sheetId, cfg){
       return o;
     })
     .filter(o => String(o["Mes"] || "").trim() !== "");
+}
+
+/* Personal por sector: lee encabezados (sectores) + fila 2 (iniciales "GL-LB-TV") */
+async function fetchPersonal(sheetId, cfg){
+  const params = new URLSearchParams({ tqx:"out:json", sheet: cfg.sheet, range: cfg.range, headers:"1" });
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?${params.toString()}`;
+  const res = await fetch(url);
+  const text = await res.text();
+  const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+  const labels = json.table.cols.map(c => String(c.label || "").trim());
+  const row = (json.table.rows[0] && json.table.rows[0].c) || [];
+  const out = [];
+  labels.forEach((sector, i) => {
+    if(!sector) return;
+    const cell = row[i];
+    const raw = cell ? String(cell.f ?? cell.v ?? "").trim() : "";
+    const personas = (raw === "" || raw === "0")
+      ? []
+      : raw.split(/[-–,;/\s]+/).map(x => x.trim()).filter(Boolean);
+    out.push({ sector, personas });
+  });
+  return out;
+}
+
+function renderPersonal(){
+  const cont = document.getElementById("personalSectores");
+  if(!cont) return;
+  const esc = t => String(t).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  const lista = DATA.personal || [];
+  cont.innerHTML = lista.length ? lista.map(s => `
+    <div class="ps-sector">
+      <span class="ps-name">${esc(s.sector)}</span>
+      <span class="ps-count">${s.personas.length}</span>
+      ${s.personas.length
+        ? s.personas.map(p => `<span class="ps-chip">${esc(p)}</span>`).join("")
+        : `<span class="ps-empty">sin asignar</span>`}
+    </div>`).join("") : `<span class="ps-empty">Sin datos de personal</span>`;
+  const f = document.getElementById("personalFecha");
+  if(f){
+    const d = new Date();
+    const dias = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+    f.textContent = `${dias[d.getDay()]} ${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}`;
+  }
 }
 
 /* Fecha de una celda gviz: "Date(2026,8,1)" (mes base 0) o texto dd/mm/aaaa */
@@ -1562,12 +1639,18 @@ async function loadFromGoogleSheets(){
       .filter(r => r.expo || r.faltante);
 
     try{
+      const pers = await fetchPersonal(sheetId, tabs.personal);
+      if(pers.length) DATA.personal = pers;
+    }catch(e){ console.warn("No se pudo leer PERSONAL POR SECTOR:", e); }
+
+    try{
       const hist = await fetchSheetTable(sheetId, tabs.historico);
       if(hist.length) DATA.historico = hist;
     }catch(e){ console.warn("No se pudo leer HISTÓRICO MENSUAL:", e); }
 
     renderAll();
     setLiveStatus(true);
+    requestAnimationFrame(refitOnResize);   // el header puede cambiar de alto con el personal
   }catch(err){
     console.error("No se pudo cargar el Sheet:", err);
     setLiveStatus(false, true);
@@ -2202,6 +2285,7 @@ function renderComparativo(){
 
 function renderAll(){
   updateDynamicLabels();
+  renderPersonal();
   renderKpis();
   renderExportaciones();
   renderExportacionesSiguiente();
